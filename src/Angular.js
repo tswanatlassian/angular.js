@@ -1379,20 +1379,22 @@ function tryDecodeURIComponent(value) {
  * Parses an escaped url query string into key-value pairs.
  * @returns {Object.<string,boolean|Array>}
  */
-function parseKeyValue(/**string*/keyValue) {
+function parseKeyValue(/**string*/keyValue, decodeQueryKeyValue) {
+    var decode = decodeQueryKeyValue || function(x) {
+    return tryDecodeURIComponent(x.replace(/\+/g, '%20'));
+};
   var obj = {};
+
   forEach((keyValue || '').split('&'), function(keyValue) {
     var splitPoint, key, val;
     if (keyValue) {
-      key = keyValue = keyValue.replace(/\+/g,'%20');
       splitPoint = keyValue.indexOf('=');
-      if (splitPoint !== -1) {
-        key = keyValue.substring(0, splitPoint);
-        val = keyValue.substring(splitPoint + 1);
-      }
-      key = tryDecodeURIComponent(key);
+      if (splitPoint === -1) {
+        key = keyValue;
+      } else {
+      key = decode(key);
       if (isDefined(key)) {
-        val = isDefined(val) ? tryDecodeURIComponent(val) : true;
+        val = isDefined(val) ? decode(val) : true;
         if (!hasOwnProperty.call(obj, key)) {
           obj[key] = val;
         } else if (isArray(obj[key])) {
@@ -1403,23 +1405,22 @@ function parseKeyValue(/**string*/keyValue) {
       }
     }
   });
+
   return obj;
 }
 
-function toKeyValue(obj) {
+function toKeyValue(obj, encodeQueryKeyValue) {
+  var encode = encodeQueryKeyValue || function(x) { return encodeUriQuery(x, true); };
+  var processPair = function(key, value) {
+    parts.push(encode(String(key)) + (value === true ? '' : '=' + encode(String(value))));
+};
+
   var parts = [];
-  forEach(obj, function(value, key) {
-    if (isArray(value)) {
-      forEach(value, function(arrayValue) {
-        parts.push(encodeUriQuery(key, true) +
-                   (arrayValue === true ? '' : '=' + encodeUriQuery(arrayValue, true)));
-      });
+  forEach(value, processPair.bind(null, key));
     } else {
-    parts.push(encodeUriQuery(key, true) +
-               (value === true ? '' : '=' + encodeUriQuery(value, true)));
-    }
+    processPair(key, value);
   });
-  return parts.length ? parts.join('&') : '';
+  return parts.join('&');
 }
 
 

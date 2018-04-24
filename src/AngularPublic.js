@@ -194,6 +194,7 @@ function publishExternalAPI(angular) {
             ngInit: ngInitDirective,
             ngNonBindable: ngNonBindableDirective,
             ngPluralize: ngPluralizeDirective,
+            ngRef: ngRefDirective,
             ngRepeat: ngRepeatDirective,
             ngShow: ngShowDirective,
             ngStyle: ngStyleDirective,

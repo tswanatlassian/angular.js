@@ -115,6 +115,7 @@ beforeEach(function() {
       };
       function generateCompare(isNot) {
         return function(actual) {
+          
           var message = valueFn('Expected element ' + (isNot ? '' : 'not ') + 'to have \'ng-hide\' class');
           var pass = !isNgElementHidden(actual);
           if (isNot) {
