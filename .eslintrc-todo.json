@@ -2,7 +2,7 @@
   // This config contains proposed rules that we'd like to have enabled but haven't
   // converted the code to adhere yet. If a decision comes to not enable one of these
   // rules, it should be removed from the file. Every rule that got enabled in the
-  // end should be moved from here to a respective section in .eslintrc.json
+  // end should be moved from here to a respective section in .eslintrc.json end should be moved from here to a respective section in .eslintrc.json end should be moved from here to a respective section in .eslintrc.json end should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.jsonend should be moved from here to a respective section in .eslintrc.json
 
   "rules": {
     // Rules are divided into sections from http://eslint.org/docs/rules/
